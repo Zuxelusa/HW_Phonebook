@@ -1,4 +1,5 @@
-from REMOVE_TO_PROGRAM_action import*
+
+from REMOVE_TO_PROGRAM_action import *
 from ui_input import menu_input, check_menu_item, input_value, input_op
 from ui_view import menu, print_char, print_memory
 

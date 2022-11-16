@@ -8,15 +8,22 @@
 можно подсветить цветом
 '''
 
-base = [{1: 'Григоркин Алексей Васильевич', 2: 'Соловьёв Александр', 3: 'Тишкина Оксана', 4: 'Сергей'}, {1: '+79025153208 +79213456790', 2: '+79512345678', 3: '+79045678088', 4: '+74541324'}]
+# функция произодит поиск всех вхождений в любых полях и на выходе выдает список в таком же формате.
 def search(find: str, base):
-    res = ()
+    res = []
+    res_ids = []
     for i in base:
         for j in i.items():
-            print (j)
             if find in j[1]:
-                res += j
+                    res_ids.append(j[0])
+
+    res_ids = set(res_ids)
+
+    for i in base:
+        dict_tmp = {}
+        for k in range(len(i)):
+            for j in res_ids:
+                dict_tmp[j] = i.get(j)
+        res.append(dict_tmp)
+
     return res
-
-
-print(search("Алекс", base))
