@@ -13,7 +13,8 @@
 #         resultData.append(dict_phone)
 #     return resultData, last_id
 
-def read_base(file): # чтение содержимого справочника. возвращает кортеж двух словарей (fio и phones)
+# чтение содержимого справочника. возвращает кортеж двух словарей (fio и phones)
+def read_base(file):
     print('Чтение')
     with open(file, 'r', encoding='utf-8') as text:
         # last_id=int(text.readline().split('\n')[0])
@@ -28,7 +29,8 @@ def read_base(file): # чтение содержимого справочник�
         resultData.append(dict_phone)
     return resultData
 
-def last_baseid(result): # определяет последний id в выгруженном справочнике
+ # определяет последний id в выгруженном справочнике
+def last_baseid(result):
     return max(list(result[0].keys()))
 
 # print(read_base_("phone_.txt"))
@@ -41,13 +43,14 @@ def last_baseid(result): # определяет последний id в выг�
 #         for key in base[0].keys():
 #             text.write(str(key)+';'+base[0][key]+';'+base[1][key]+'\n')
 
+# запись нового контакта в файл (base - кортеж из 2 элементов фио и телефоны)
 def new_contact(file,base,last_id):
     print('Запись')
     with open(file, 'a', encoding='utf-8') as text:
         text.write(str(last_id) + ';' + base[0] + ';' + base[1] + '\n')
 
-result = read_base("phone.txt")
-save_base("phone.txt", ("ИИИ", "099090283"), last_baseid(result))
+ # result = read_base("phone.txt")
+ # save_base("phone.txt", ("ИИИ", "099090283"), last_baseid(result))
 
 def find_contact():
     print('Поиск')
