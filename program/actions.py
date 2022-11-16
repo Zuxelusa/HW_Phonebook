@@ -38,15 +38,15 @@ def last_baseid(result):
 print(read_base(PB_FILE))
 # print(last_baseid(read_base_("phone_.txt")))
 
-def save_base(file,base,last_id):
-    print('Запись')
-    with open(file, 'w', encoding='utf-8') as text:
-        text.write(str(last_id)+'\n')
-        for key in base[0].keys():
-            text.write(str(key)+';'+base[0][key]+';'+base[1][key]+'\n')
+# def save_base(file,base,last_id):
+#     print('Запись')
+#     with open(file, 'w', encoding='utf-8') as text:
+#         text.write(str(last_id)+'\n')
+#         for key in base[0].keys():
+#             text.write(str(key)+';'+base[0][key]+';'+base[1][key]+'\n')
 
 #апись полной измененной базы обратно в файл
-def save_base_(file,base,last_id):
+def save_base(file,base,last_id):
     print('Запись')
     with open(file, 'w', encoding='utf-8') as text:
         for key in base[0].keys():
