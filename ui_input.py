@@ -15,6 +15,22 @@ def del_input():
     """
     return input('Ведите ID удаляемой записи: ')
 
+def correct_input():
+    """
+    Ф-ция получает от пользователя id корректируемого элемента
+    :return: число, id
+    """
+    return input('Ведите ID корректируемой записи: ')
+
+def new_input():
+    """
+    Ф-ция получает от пользователя ФИО и телефон нового контакта
+    :return: число, id
+    """
+    name=input('Ведите ФИО: ')
+    phone=input('Введите номер телефона: ')
+    return name, phone 
+
 
 def check_menu_item(menu_item):
     """

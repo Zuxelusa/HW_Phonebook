@@ -12,7 +12,7 @@ while True:
         print('Такого пункта нет')
         continue
     elif menu_item=='0': break
-    choice(menu_item,base)
+    last_id=choice(menu_item,base,last_id)
 save_base('phone.txt',base,last_id)
 
 

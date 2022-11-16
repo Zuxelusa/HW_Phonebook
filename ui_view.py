@@ -20,6 +20,18 @@ def menu():
         print(f"{index} - {item}")
     print("Выберите пункт меню: ", end="")
 
+MENU_CORRECT = {
+   "1": "ФИО",
+   "2": "Телефон",
+   "3": "Добавить телефон",
+   "0": "Выход"
+}
+
+def correct_menu():
+    for index, item in MENU_CORRECT.items():
+        print(f"{index} - {item}")
+    print("Выберите пункт меню: ", end="")
+
 
 def print_char(ch):
     print(f"Введите {ch}: ", end="")
