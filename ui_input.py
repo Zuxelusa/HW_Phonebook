@@ -1,5 +1,17 @@
 from ui_view import MENU_ITEMS
 
+def input_check(min_val, max_val):
+    while True:
+        val = input()
+        if val.isdigit():
+            val = int(val)
+            if min_val <= val <= max_val:
+                return val
+            else: print(f"Введите число от {min_val} до {max_val}")
+        else:
+            print(f"Введите число")
+            continue
+
 
 def menu_input():
     """
