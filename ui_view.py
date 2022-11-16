@@ -1,4 +1,4 @@
-import action
+import REMOVE_TO_PROGRAM_action
 
 MENU_ITEMS = {
    "1": "Поиск",

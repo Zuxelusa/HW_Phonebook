@@ -1,40 +1,25 @@
-'''
-    2. Новый контакт                        (actions)
-Производим поиск на отсутствие такой же записи, если записи нет, то
-    запрашиваем данные у пользователя       (ui)
-    производим запись в базу данных
-    возвращаем результат занесения (T/F)
+PB_FILE = "..\phone.txt"
 
-    3. Изменить контакт                     (actions)
-запрашиваем данные для поиска записи для изменения (ui), если есть, то
-    Производим поиск на наличие такой же записи, если записи найдена, то
-        запрашиваем данные у пользователя       (ui)
-        удаляем найденную запись из базы
-        производим запись в базу данных новой записи
-        возвращаем результат изменения (T/F)
+# def read_base(file):
+#     print('Чтение')
+#     with open(file, 'r', encoding='utf-8') as text:
+#         last_id=int(text.readline().split('\n')[0])
+#         resultData = list()
+#         dict_contact={}
+#         dict_phone={}
+#         for line in text.readlines():
+#             list_record=line.split('\n')[0].split(';')
+#             dict_contact[int(list_record[0])]=list_record[1]
+#             dict_phone[int(list_record[0])]=list_record[2]
+#         resultData.append(dict_contact)
+#         resultData.append(dict_phone)
+#     return resultData, last_id
 
-    4. Удалить контакт                      (actions)
-запрашиваем данные для поиска записи для удаления (ui), если есть, то
-    Производим поиск на наличие такой же записи, если записи найдена, то
-        удаляем найденную запись из базы
-        возвращаем результат удаления (T/F)
-
-'''
-
-
+# чтение содержимого справочника. возвращает кортеж двух словарей (fio и phones)
 def read_base(file):
     print('Чтение')
     with open(file, 'r', encoding='utf-8') as text:
-        resultData = list()
-        for line in text.readlines():
-            resultData.append(tuple(line.split('\n')[0].split(';')))
-    # print(resultData)
-    return resultData
-
-def read_base_(file):
-    print('Чтение')
-    with open(file, 'r', encoding='utf-8') as text:
-        last_id=int(text.readline().split('\n')[0])
+        # last_id=int(text.readline().split('\n')[0])
         resultData = list()
         dict_contact={}
         dict_phone={}
@@ -42,26 +27,44 @@ def read_base_(file):
             list_record=line.split('\n')[0].split(';')
             dict_contact[int(list_record[0])]=list_record[1]
             dict_phone[int(list_record[0])]=list_record[2]
-        resultData.append(tuple([dict_contact,dict_phone]))
-    return resultData, last_id
+        resultData.append(dict_contact)
+        resultData.append(dict_phone)
+    return resultData
 
-print (read_base_("phone.txt"))
-# ids, fio, phones = zip(*read_base("phone.txt"))
-# ids, fio, phones = zip(*read_base_("phone.txt"))
-# print
-# print(ids)
-# print(fio)
-# print(phones)
+ # определяет последний id в выгруженном справочнике
+def last_baseid(result):
+    return max(list(result[0].keys()))
 
+print(read_base(PB_FILE))
+# print(last_baseid(read_base_("phone_.txt")))
 
-def save_base(file,base):
+def save_base(file,base,last_id):
     print('Запись')
     with open(file, 'w', encoding='utf-8') as text:
-        for line in range(len(base)):
-            str_phone=''
-            for num in range(len(base[line])-2):
-                str_phone+=';'+base[line][num+2]
-            text.write(base[line][0]+';'+base[line][1]+str_phone+'\n')
+        text.write(str(last_id)+'\n')
+        for key in base[0].keys():
+            text.write(str(key)+';'+base[0][key]+';'+base[1][key]+'\n')
+
+#апись полной измененной базы обратно в файл
+def save_base_(file,base,last_id):
+    print('Запись')
+    with open(file, 'w', encoding='utf-8') as text:
+        for key in base[0].keys():
+            text.write(str(key)+';'+base[0][key]+';'+base[1][key]+'\n')
+
+result = read_base("phone.txt")
+save_base_("phone.txt", result, last_baseid(result))
+
+
+
+# запись нового контакта в файл (base - кортеж из 2 элементов фио и телефоны)
+# def new_contact(file,base,last_id):
+#     print('Запись')
+#     with open(file, 'a', encoding='utf-8') as text:
+#         text.write(str(last_id) + ';' + base[0] + ';' + base[1] + '\n')
+
+ # result = read_base("phone.txt")
+ # save_base("phone.txt", ("ИИИ", "099090283"), last_baseid(result))
 
 def find_contact():
     print('Поиск')
@@ -99,4 +102,3 @@ OPERATIONS = {
 
 def choice(op):
     OPERATIONS[op]()
-
