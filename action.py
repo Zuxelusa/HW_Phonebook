@@ -1,6 +1,9 @@
 from ui_input import *
 from ui_view import *
+from search import search
 import time
+
+PB_FILE = "phone.txt"
 
 def read_base(file):
     print('Чтение')
@@ -17,7 +20,6 @@ def read_base(file):
         resultData.append(dict_phone)
     return resultData, last_id
 
-
 def save_base(file, base, last_id):
     print('Запись')
     with open(file, 'w', encoding='utf-8') as text:
@@ -25,11 +27,10 @@ def save_base(file, base, last_id):
         for key in base[0].keys():
             text.write(str(key)+';'+base[0][key]+';'+base[1][key]+'\n')
 
-
-def find_contact():
-    print('Поиск')
+def find_contact(base, last_id):
+    find = input("Что ищем: ")
+    print (search(find, base))
     return
-
 
 def edit_contact(base, last_id):
     print('Редактирование')

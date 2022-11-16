@@ -8,7 +8,7 @@
 '''
 
 # функция произодит поиск всех вхождений в любых полях и на выходе выдает список в таком же формате.
-def search(base, last_id):
+def search(find, base):
     res = []
     res_ids = []
     for i in base:
