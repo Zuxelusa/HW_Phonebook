@@ -1,6 +1,6 @@
 from ui_input import *
 from ui_view import *
-
+import time
 
 def read_base(file):
     print('Чтение')
@@ -106,3 +106,9 @@ OPERATIONS = {
 
 def choice(op, base, last_id):
     return OPERATIONS[op](base, last_id)
+
+def log_add_note(event, description):
+    with open("..\log.txt", "a", encoding="utf-8") as log:
+        line = f"{time.strftime('%d-%m-%Y %H:%M:%S')};{event};{description}\n"
+        log.write(line)
+
