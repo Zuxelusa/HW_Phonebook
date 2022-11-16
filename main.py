@@ -1,15 +1,18 @@
+from action import*
+from ui_input import menu_input, check_menu_item, input_value, input_op
+from ui_view import menu, print_char, print_memory
 
-'''
-Заголовок                                   (ui)
-Меню с выбором вариантов                    (ui)
-    1. Поиск контакта по любым данным       (search)
-    2. Новый контакт                        (actions)
-    3. Изменить контакт                     (actions)
-    4. Удалить контакт                      (actions)
-    5. Экспорт контактов (CSV, JSON, HTML)  (convert)
-    6. Импорт контактов (CSV)               (import)
-    0. Выход
+base,last_id=read_base('phone.txt')
+# print(base)
+while True:
+    menu()
+    menu_item = menu_input()
+    if not check_menu_item(menu_item):
+        # обработка неправильного выбора меню
+        print('Такого пункта нет')
+        continue
+    elif menu_item=='0': break
+    choice(menu_item)
+save_base('phone.txt',base,last_id)
 
-каждое действие со справочником создает запись в лог файл   (logger)
 
-'''
