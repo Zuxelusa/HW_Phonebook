@@ -52,8 +52,8 @@ def save_base_(file,base,last_id):
         for key in base[0].keys():
             text.write(str(key)+';'+base[0][key]+';'+base[1][key]+'\n')
 
-result = read_base("phone.txt")
-save_base_("phone.txt", result, last_baseid(result))
+# result = read_base("phone.txt")
+# save_base_("phone.txt", result, last_baseid(result))
 
 
 
