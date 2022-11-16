@@ -8,6 +8,8 @@
 можно подсветить цветом
 '''
 
+base = [{1: 'Григоркин Алексей Васильевич', 2: 'Соловьёв Александр', 3: 'Тишкина Оксана', 4: 'Сергей'}, {1: '+79025153208 +79213456790', 2: '+79512345678', 3: '+79045678088', 4: '+74541324'}]
+
 # функция произодит поиск всех вхождений в любых полях и на выходе выдает список в таком же формате.
 def search(find: str, base):
     res = []
@@ -15,7 +17,7 @@ def search(find: str, base):
     for i in base:
         for j in i.items():
             if find in j[1]:
-                    res_ids.append(j[0])
+                 res_ids.append(j[0])
 
     res_ids = set(res_ids)
 
@@ -27,3 +29,8 @@ def search(find: str, base):
         res.append(dict_tmp)
 
     return res
+
+# функция возвращает True если искомое вхождение найдено в базе.
+def is_data(find, base):
+    if not search(find, base)[0]: return False
+    return True
