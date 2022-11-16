@@ -1,3 +1,5 @@
+from ui_input import*
+
 def read_base(file):
     print('Чтение')
     with open(file, 'r', encoding='utf-8') as text:
@@ -32,8 +34,15 @@ def new_contact():
     print('Новый контакт')
     return
 
-def del_contact():
+def del_contact(base):
     print('Удаление')
+    id=int(del_input())
+    if base[0].get(id, 0):
+        base[0].pop(id)
+        base[1].pop(id)
+        # break
+    else: print('Такого ID нет')
+    print(base)
     return
 
 def import_contacts():
@@ -54,5 +63,6 @@ OPERATIONS = {
 }
 
 
-def choice(op):
-    OPERATIONS[op]()
+def choice(op,base):
+    OPERATIONS[op](base)
+    return

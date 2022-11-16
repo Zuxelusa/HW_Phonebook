@@ -3,7 +3,7 @@ from ui_input import menu_input, check_menu_item, input_value, input_op
 from ui_view import menu, print_char, print_memory
 
 base,last_id=read_base('phone.txt')
-# print(base)
+# print(type(base))
 while True:
     menu()
     menu_item = menu_input()
@@ -12,7 +12,7 @@ while True:
         print('Такого пункта нет')
         continue
     elif menu_item=='0': break
-    choice(menu_item)
+    choice(menu_item,base)
 save_base('phone.txt',base,last_id)
 
 

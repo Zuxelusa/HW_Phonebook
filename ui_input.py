@@ -8,6 +8,12 @@ def menu_input():
     """
     return input()
 
+def del_input():
+    """
+    Ф-ция получает от пользователя id удаляемого элемента
+    :return: число, id
+    """
+    return input('Ведите ID удаляемой записи: ')
 
 
 def check_menu_item(menu_item):
