@@ -6,7 +6,7 @@ import time
 PB_FILE = "phone.txt"
 
 def read_base(file):
-    print('Чтение')
+    # print('Чтение')
     with open(file, 'r', encoding='utf-8') as text:
         last_id = int(text.readline().split('\n')[0])
         resultData = list()
@@ -18,6 +18,7 @@ def read_base(file):
             dict_phone[int(list_record[0])] = list_record[2]
         resultData.append(dict_contact)
         resultData.append(dict_phone)
+        log_add_note("READBASE", "инициализация")
     return resultData, last_id
 
 def save_base(file, base, last_id):
@@ -26,10 +27,17 @@ def save_base(file, base, last_id):
         text.write(str(last_id)+'\n')
         for key in base[0].keys():
             text.write(str(key)+';'+base[0][key]+';'+base[1][key]+'\n')
+    log_add_note("SAVEBASE", "сохранение снимка базы")
 
 def find_contact(base, last_id):
-    find = input("Что ищем: ")
-    print (search(find, base))
+    search_title()
+    f_str = input()
+    find = search(f_str, base)
+    print("\nРезультаты поиска: ")
+    if find[0]: print(find)
+    else: print("\nЗаписей не найдено")
+    print("\n")
+    log_add_note("SEARCH", f"строка поиска: {f_str}")
     return
 
 def edit_contact(base, last_id):
@@ -47,11 +55,13 @@ def edit_contact(base, last_id):
             elif menu_item == '1':
                 base[0][id] = input('Введите новое ФИО: ')
             elif menu_item == '0':
+                log_add_note("EDIT", f"редактирование записи с id: {id}")
                 break
             else:
                 print('Такого пункта нет')
     else:
         print('Такого ID нет')
+
     return last_id
 
 
@@ -61,6 +71,7 @@ def new_contact(base, last_id):
     last_id += 1
     base[0][last_id] = name
     base[1][last_id] = phone
+    log_add_note("NEW", f"создание новой записи: {name}, {phone}")
     return last_id
 
 
@@ -71,6 +82,7 @@ def del_contact(base, last_id):
         base[0].pop(id)
         base[1].pop(id)
         # break
+        log_add_note("DELETE", f"удалена запись с id : {id}")
     else:
         print('Такого ID нет')
     # print(base)
@@ -92,6 +104,7 @@ def export_contacts(base,last_id):
         for key in base[0].keys():
             text.write(f'        <tr > <td > {key} <td > {base[0][key]} <td > {base[1][key]} </tr >\n')
         text.write(f'    </table >\n</body >\n</html >\n')
+    log_add_note("EXPORT", f"экспорт базы в HTML")
     return last_id
 
 
@@ -109,7 +122,13 @@ def choice(op, base, last_id):
     return OPERATIONS[op](base, last_id)
 
 def log_add_note(event, description):
-    with open("..\log.txt", "a", encoding="utf-8") as log:
+    with open("log.txt", "a", encoding="utf-8") as log:
         line = f"{time.strftime('%d-%m-%Y %H:%M:%S')};{event};{description}\n"
         log.write(line)
 
+def list_view_PB():
+    with open(PB_FILE, "r", encoding="utf-8") as file:
+        lst = file.readlines()
+    str_temp = "".join(lst[1:])
+    str_temp = str_temp.replace(";", "\t\t")
+    return str_temp

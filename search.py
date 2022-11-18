@@ -24,5 +24,4 @@ def search(find, base):
             for j in res_ids:
                 dict_tmp[j] = i.get(j)
         res.append(dict_tmp)
-
     return res
